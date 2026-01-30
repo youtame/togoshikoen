@@ -1,0 +1,26 @@
+services:
+  front:
+    build:
+      context: ./front
+    volumes:
+      - ./front:/app
+    ports:
+      - "5173:5173"
+    depends_on:
+      - back
+    environment:
+      - VITE_API_BASE=http://back:3000
+    tty: true
+
+  back:
+    build:
+      context: ./back
+    volumes:
+      - ./back:/app
+    ports:
+      - "3000:3000"
+    environment:
+      - SWITCHBOT_TOKEN=${SWITCHBOT_TOKEN}
+      - SWITCHBOT_SECRET=${SWITCHBOT_SECRET}
+    tty: true
+
