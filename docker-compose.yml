@@ -21,6 +21,6 @@ services:
       - "3000:3000"
     environment:
       - SWITCHBOT_TOKEN=${SWITCHBOT_TOKEN}
-      - SWITCHBOT_SECRET=${SWITCHBOT_SECRET}
+      - SWITCHBOT_SECRETKEY=${SWITCHBOT_SECRETKEY}
     tty: true
 
