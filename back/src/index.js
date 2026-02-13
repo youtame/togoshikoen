@@ -34,6 +34,27 @@ function createSwitchBotHeaders(token, secretkey) {
     };
 }
 
+app.get("/weather", async (req, res) => {
+    try {
+        const weatherkey = process.env.WEATHER_TOKEN;
+        console.log("weather key", weatherkey)
+        const weatherEndpoint = `https://api.openweathermap.org/data/2.5/weather`;
+        
+        const { data } = await axios.get(weatherEndpoint, {
+        params: {
+            zip: "156-0053,JP",
+            APPID: weatherkey,
+            units: "metric",
+        },
+        });
+
+        res.json(data);
+    } catch (err) {
+        console.error(err.message || err);
+        res.status(500).json({ error: "Failed to fetch weather" });
+    }
+});
+
 app.get("/", async (req, res) => {
     try {
         const devices = await api.getDevices();
